@@ -1,0 +1,21 @@
+server {
+
+    listen 80;
+    listen 443 ssl;
+    ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+    ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+
+	proxy_hide_header X-Powered-By;
+	server_name localhost;
+	server_tokens off;
+
+	location / {
+
+		alias /srv/aplicaciones/frontend/dist/landing/;
+	    try_files $uri /index.html;
+
+        access_log /var/log/nginx/access-frontend.log;
+        error_log /var/log/nginx/error-frontend.log;
+
+	}
+}
