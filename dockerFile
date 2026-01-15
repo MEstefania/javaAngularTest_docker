@@ -27,7 +27,7 @@ COPY java/devsuTest* /srv/aplicaciones/backend/Backend.jar
 ##############################################
 ### INSTALAMOS ANGULAR
 ##############################################
-COPY submodules/frontend/frontend /srv/aplicaciones/frontend
+COPY frontend/ /srv/aplicaciones/frontend
 COPY environment/frontend.ts /srv/aplicaciones/frontend/src/environments/environment.prod.ts
 
 WORKDIR /srv/aplicaciones/frontend
