@@ -8,7 +8,10 @@ RUN apt-get update -y
 ####################################
 ## INSTALAMOS PAQUETES NECESARIOS
 ####################################
-RUN apt-get install -y openjdk-11-jdk curl nodejs npm nginx
+RUN apt-get install -y openjdk-11-jdk curl nginx
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+RUN apt-get install -y nodejs
+RUN apt-get install -y npm 
 
 # Instalamos Angular CLI
 RUN npm install -g @angular/cli@21.0.5
