@@ -18,15 +18,8 @@ services:
       retries: 5
     restart: always
 
-volumes:
-  postgres_data:
-
-
-#    networks:
- #     - app-network
-
   app-banco:
-    container_name: backend-banco
+    container_name: app-banco
     build:
       context: ./
       dockerfile: dockerFile
@@ -36,7 +29,7 @@ volumes:
     ports:
       - "8083:8083"
     restart: always
-    stdin_open: true
+        stdin_open: true
     logging:
       driver: "json-file"
       options:
@@ -47,20 +40,5 @@ volumes:
       devsu-database:
         condition: service_healthy
 
-#  frontend:
- #   build:
-  #    context: ./frontend
-   #   args:
-    #    DNS: ${DNS:-localhost}
-     #   HTTP_APP_PORT: ${HTTP_APP_PORT:-8080}
-  #  container_name: angular-frontend
-   # ports:
-    #  - "80:80"
- #   depends_on:
-  #    - backend
-   # networks:
-    #  - app-network
-
-#networks:
- # app-network:
-  #  driver: bridge
+volumes:
+  postgres_data:
