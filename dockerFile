@@ -39,7 +39,10 @@ COPY frontend/ /srv/aplicaciones/frontend
 COPY environments/frontend.ts /srv/aplicaciones/frontend/src/environments/environment.ts
 
 WORKDIR /srv/aplicaciones/frontend
-RUN npm install && ng build --configuration production
+RUN npm install 
+RUN ng build --configuration production || \
+    ng build DevsuAplicacionAngular --configuration production
+#&& ng build --configuration production
 
 #################################
 ### CONFIGURAMOS NGINX
