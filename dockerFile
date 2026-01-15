@@ -11,7 +11,7 @@ RUN apt-get update -y
 RUN apt-get install -y openjdk-11-jdk curl nodejs npm nginx
 
 # Instalamos Angular CLI
-RUN npm install -g @angular/cli@13
+RUN npm install -g @angular/cli@21.0.5
 
 #################################
 ## CREAMOS DIRECTORIOS
@@ -42,7 +42,6 @@ COPY environments/frontend.ts /srv/aplicaciones/frontend/src/environments/enviro
 
 WORKDIR /srv/aplicaciones/frontend
 RUN npm install && ng build --configuration production
-
 
 #################################
 ### CONFIGURAMOS NGINX
