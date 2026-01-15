@@ -38,8 +38,8 @@ COPY java/devsuTest* /srv/aplicaciones/backend/Backend.jar
 COPY frontend/ /srv/aplicaciones/frontend
 COPY environments/frontend.ts /srv/aplicaciones/frontend/src/environments/environment.ts
 
-#WORKDIR /srv/aplicaciones/frontend
-#RUN npm install && ng build --configuration production
+WORKDIR /srv/aplicaciones/frontend
+RUN npm install && ng build --configuration production
 
 #################################
 ### CONFIGURAMOS NGINX

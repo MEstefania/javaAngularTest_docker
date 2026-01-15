@@ -4,7 +4,7 @@ server {
     server_name localhost;
     server_tokens off;
 
-    root /srv/aplicaciones/frontend/dist/devsu-aplicacion-angular;
+    root /srv/aplicaciones/frontend/dist/DevsuAplicacionAngular/browser;
     index index.html index.htm;
 
     access_log /var/log/nginx/access-frontend.log;
