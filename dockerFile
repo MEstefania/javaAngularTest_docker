@@ -24,24 +24,6 @@ RUN mkdir -p /srv/aplicaciones/backend
 COPY environments/backend.env /srv/aplicaciones/backend/.env
 COPY java/devsuTest* /srv/aplicaciones/backend/Backend.jar
 
-##############################################
-### INSTALAMOS ANGULAR
-##############################################
-#COPY frontend/ /srv/aplicaciones/frontend
-#COPY environment/frontend.ts /srv/aplicaciones/frontend/src/environments/environment.prod.ts
-
-#WORKDIR /srv/aplicaciones/frontend
-#RUN npm install && ng build --configuration production
-
-#################################
-### CONFIGURAMOS NGINX
-#################################
-#COPY nginx/* /etc/nginx/sites-available/
-#RUN ln -s /etc/nginx/sites-available/devsu.demo /etc/nginx/sites-enabled/ \
- #   && rm -f /etc/nginx/sites-enabled/default
-
-#RUN sed -i "s/<DNS>/$DNS/g" /etc/nginx/sites-available/devsu.demo
-
 # Exponer puertos
 EXPOSE 80 8080
 
@@ -52,4 +34,23 @@ EXPOSE 80 8080
 WORKDIR /srv/aplicaciones/backend
 CMD ["java","-jar","Backend.jar"]
 
-#&& nginx -g 'daemon off;'
+##############################################
+### INSTALAMOS ANGULAR
+##############################################
+COPY frontend/ /srv/aplicaciones/frontend
+COPY environment/frontend.ts /srv/aplicaciones/frontend/src/environments/environment.ts
+
+WORKDIR /srv/aplicaciones/frontend
+RUN npm install && ng build --configuration production
+
+
+#################################
+### CONFIGURAMOS NGINX
+#################################
+COPY nginx/* /etc/nginx/sites-available/
+RUN ln -s /etc/nginx/sites-available/devsu.demo /etc/nginx/sites-enabled/ \
+    && rm -f /etc/nginx/sites-enabled/default
+
+CMD nginx -g 'daemon off';
+
+#RUN sed -i "s/<DNS>/$DNS/g" /etc/nginx/sites-available/devsu.demo
