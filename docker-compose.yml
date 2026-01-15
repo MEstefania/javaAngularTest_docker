@@ -4,40 +4,48 @@ services:
     image: lmmdock/postgres-multi
     container_name: devsu-database
     ports:
-      - "5432"
+      - "5432:5432"
     environment:
       POSTGRES_USERS: "devsu_owner:password|devsu_user:password"
       POSTGRES_DATABASES: "devsutecnica_db:devsu_owner"
-      POSTGRES_DB: devsutecnica_db
+#      POSTGRES_DB: devsutecnica_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      test: [ "CMD-SHELL", "pg_isready -U devsu_owner -d devsutecnica_db" ]
       interval: 10s
       timeout: 5s
       retries: 5
-    logging:
-      driver: "json-file"
-      options:
-        max-size: 50m
     restart: always
+
+volumes:
+  postgres_data:
+
+
 #    networks:
  #     - app-network
 
-  #backend:
-   # build:
-    #  context: ./backend
-     # args:
-      #  DNS: ${DNS:-localhost}
-      #  HTTP_APP_PORT: ${HTTP_APP_PORT:-8083}
-    #container_name: spring-backend
-    #ports:
-     # - "8083:8083"
-    #depends_on:
-     # - devsu-database
-    #networks:
-     # - app-network
-    #environment:
-     # - DATABASE_HOST=devsu-database
-      #- DATABASE_PORT=5432
+  app-banco:
+    container_name: backend-banco
+    build:
+      context: ./
+      dockerfile: dockerFile
+      args:
+        DNS: localhost
+        HTTP_APP_PORT: 80
+    ports:
+      - "8083:8083"
+    restart: always
+    stdin_open: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+    links:
+      - devsu-database
+    depends_on:
+      devsu-database:
+        condition: service_healthy
 
 #  frontend:
  #   build:
