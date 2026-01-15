@@ -29,7 +29,7 @@ services:
     ports:
       - "8083:8083"
     restart: always
-        stdin_open: true
+    stdin_open: true
     logging:
       driver: "json-file"
       options:

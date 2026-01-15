@@ -21,7 +21,7 @@ RUN mkdir -p /srv/aplicaciones/backend
 ####################################
 ## COPIAMOS ENVIRONMENT y JARS
 ####################################
-COPY environment/backend.env /srv/aplicaciones/backend/.env
+COPY environments/backend.env /srv/aplicaciones/backend/.env
 COPY java/devsuTest* /srv/aplicaciones/backend/Backend.jar
 
 ##############################################
@@ -48,5 +48,8 @@ EXPOSE 80 8080
 #################################
 ### Script de inicio
 #################################
-CMD java -jar /srv/aplicaciones/backend/Backend.jar 
+##CMD java -jar /srv/aplicaciones/backend/Backend.jar 
+WORKDIR /srv/aplicaciones/backend
+CMD ["java","-jar","Backend.jar"]
+
 #&& nginx -g 'daemon off;'
