@@ -5,7 +5,7 @@ server {
     server_tokens off;
 
     root /srv/aplicaciones/frontend/dist/DevsuAplicacionAngular/browser;
-    index index.html index.htm;
+    index index.csr.html;
 
     access_log /var/log/nginx/access-frontend.log;
     error_log /var/log/nginx/error-frontend.log;
@@ -19,6 +19,6 @@ server {
 
     # Angular routing
     location / {
-        try_files $uri $uri/ /index.html;
+        try_files $uri $uri/ /index.csr.html;
     }
 }
