@@ -13,7 +13,6 @@ server {
 
     location / {
         try_files $uri $uri/ /index.html;
-        
         access_log /var/log/nginx/access-frontend.log;
         error_log /var/log/nginx/error-frontend.log;
     }
