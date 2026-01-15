@@ -38,7 +38,7 @@ CMD ["java","-jar","Backend.jar"]
 ### INSTALAMOS ANGULAR
 ##############################################
 COPY frontend/ /srv/aplicaciones/frontend
-COPY environment/frontend.ts /srv/aplicaciones/frontend/src/environments/environment.ts
+COPY environments/frontend.ts /srv/aplicaciones/frontend/src/environments/environment.ts
 
 WORKDIR /srv/aplicaciones/frontend
 RUN npm install && ng build --configuration production
